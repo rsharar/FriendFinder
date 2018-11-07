@@ -25,13 +25,13 @@
         <div class="form-group row">
             <label for="example-text-input" class="col-2 col-form-label">Name (Required)</label>
             <div class="col-10">
-                <input class="form-control" type="text" value="name" id="name-input">
+                <input class="form-control" type="text" value="" id="name-input">
             </div>
         </div>
         <div class="form-group row">
             <label for="example-url-input" class="col-2 col-form-label">Link to photo image (Required)</label>
             <div class="col-10">
-                <input class="form-control" type="url" value="https://yourimagelink.com" id="photo-url-input">
+                <input class="form-control" type="url" value="" id="photo-url-input">
             </div>
         </div>
         <h4>Question 1</h4>
@@ -133,18 +133,27 @@
         // Question: What does this code do?
         $("#btn-primary").on("click", function (event) {
             event.preventDefault();
-
+            // newFriend object to store survey responses
             var newFriend = {
-                name: $("#name").val().trim(),
-                photo: $("#role").val().trim(),
-                scores: $("#age").val().trim(),
+                name: $("#name-input").val().trim(),
+                photo: $("#photo-url-input").val().trim(),
+                scores: [$("#q1").val().trim(),
+                         $("#q2").val().trim(),
+                         $("#q3").val().trim(),
+                         $("#q4").val().trim(),
+                         $("#q5").val().trim(),
+                         $("#q6").val().trim(),
+                         $("#q7").val().trim(),
+                         $("#q8").val().trim(),
+                         $("#q9").val().trim(),
+                         $("#q10").val().trim(),
+                        ]
             };
-
-            // Question: What does this code do??
-            $.post("/api/characters", newCharacter)
+            // POST request to send newFriend object data to api
+            $.post("/api/friends", newFriend)
                 .then(function (data) {
                     console.log(data);
-                    alert("Adding character...");
+                    alert("Checking for your best match...");
                 });
 
         });
