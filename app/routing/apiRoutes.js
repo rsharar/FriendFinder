@@ -16,17 +16,24 @@ app.use(express.json());
 var friends = []
 
 // get route to load home.html
-app.get("/", function(req,res){
+app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
- })
+})
 
- // GET route to api of all friends
- app.get("/api/friends", function(req, res) {
+// GET route to API of all friends
+app.get("/api/friends", function (req, res) {
     return res.json(friends);
-  });
+});
+
+// add newFriend object data to friends array
+app.post("/api/friends", function (req, res) {
+    var newFriend = req.body;
+    friends.push(newFriend);
+    res.json(newFriend);
+});
 
 
- //test connection to server
- app.listen(PORT,function(){
+//test connection to server
+app.listen(PORT, function () {
     console.log("Server is listening on PORT: " + PORT);
- })
+})
