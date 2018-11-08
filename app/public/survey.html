@@ -125,17 +125,20 @@
             <option value="5">5 (Strongly Agree)</option>
         </select>
         <br><br>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="survey-submit">Submit</button>
     </div>
 
     <div class="modal" id ='best-friend-modal'>
 
     </div>
 
-    <!-- POST request to  -->
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- POST request to /api/friends -->
     <script type="text/javascript">
         // Question: What does this code do?
-        $(".btn-primary").on("click", function (event) {
+        $("#survey-submit").on("click", function (event) {
             event.preventDefault();
             // newFriend object to store survey responses
             var newFriend = {
@@ -162,11 +165,11 @@
                     }
                 });
         });
-        <footer class="footer">
-            <div class="container">
-                <p><a href="/api/friends">API Friends List</a></p>
-            </div>
-        </footer>
+        // <footer class="footer">
+        //     <div class="container">
+        //         <p><a href="/api/friends">API Friends List</a></p>
+        //     </div>
+        // </footer>
     </script>
     <!-- external JS -->
     <script src="" async defer></script>
