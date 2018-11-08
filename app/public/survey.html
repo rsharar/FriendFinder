@@ -128,28 +128,28 @@
         <button type="submit" class="btn btn-primary" id="survey-submit">Submit</button>
     </div>
 
-<!-- Best friend match modal -->
-<div class="modal" tabindex="-1" role="dialog">
+    <!-- Best friend match modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="best-match-modal">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Your new best friend!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Your new best friend!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Name: </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-              <p>Name: </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
     </div>
 
-    
+
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- POST request to /api/friends -->
@@ -176,9 +176,8 @@
             // POST request to send newFriend object data to /api/friends
             $.post("/api/friends", newFriend)
                 .then(function (data) {
-                    if(data){
-                    console.log(data);
-                    alert("Checking for your best match...");
+                    if (data) {
+                        $("#best-match-modal").modal("show");
                     }
                 });
         });
