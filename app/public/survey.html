@@ -134,15 +134,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Your new best friend!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                 </div>
                 <div class="modal-body">
                     <!-- Best friend name -->
                     <h5 id="best-friend-name"></h5>
                     <!-- Best friend picture -->
-                    <img src="" id = "best-friend-img" class="img-thumbnail">
+                    <img src="" id="best-friend-img" class="img-thumbnail">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -180,18 +180,20 @@
             $.post("/api/friends", newFriend)
                 .then(function (data) {
                     if (data) {
+                        console.log(data);
                         // populate modal with best friend data
                         $("#best-friend-name").text(data.name);
-                        $("#best-friend-img").attr({"src": data.photo})
+                        $("#best-friend-img").attr({ "src": data.photo })
                         $("#best-match-modal").modal("show");
                         // clear form
                         $(".form-control").val("");
                     }
                 });
         });
+        // <!-- Footer -->
         // <footer class="footer">
         //     <div class="container">
-        //         <p><a href="/api/friends">API Friends List</a></p>
+        //         <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/rsharar/FriendFinder">GitHub Repo</a></p>
         //     </div>
         // </footer>
     </script>
