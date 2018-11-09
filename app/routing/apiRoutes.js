@@ -25,6 +25,7 @@ app.post("/api/friends", function (req, res) {
     console.log(newFriend.name + ": " + newFriendTotalScore);
 
     // CALC SUM OF FRIENDS SCORES
+    var diffArr = [];
     for (i in friends){
         // declare variable to store scores of friends currently in DB
         var dbFriendScores = friends[i].scores;
@@ -33,13 +34,16 @@ app.post("/api/friends", function (req, res) {
                 dbFriendScores[k] = parseInt(dbFriendScores[k]);
                 dbFriendTotalScore = dbFriendTotalScore + dbFriendScores[k];
             }
-        console.log(friends[i].name + ": "+ dbFriendTotalScore)
+        diffArr.push(newFriendScoreArr - dbFriendTotalScore)
     }
-    // FIND SMALLEST DIFFERENCE IN TOTAL SCORES
+    console.log(diffArr)
 
+    // FIND SMALLEST DIFFERENCE IN TOTAL SCORES
+    var min = Math.min.apply(diffArr)
+    console.log(min)
 
     // RETURN THE 'BEST MATCH' in modal
-    res.json(res.body);
+    res.json(req.body);
 });
 
 }
