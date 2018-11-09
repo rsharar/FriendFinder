@@ -150,6 +150,22 @@
             </div>
         </div>
     </div>
+    <!-- Error modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="error-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Please complete all required fields.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <br><br><br>
     <!-- Footer -->
@@ -184,6 +200,10 @@
                 $("#q10").val().trim(),
                 ]
             };
+            if (newFriend.name === "" || newFriend.photo === ""){
+                $("#error-modal").modal("show");
+            }
+            else{
             // POST request to send newFriend object data to /api/friends
             $.post("/api/friends", newFriend)
                 .then(function (data) {
@@ -197,6 +217,7 @@
                         $(".form-control").val("");
                     }
                 });
+            }
         });
     </script>
     <!-- external JS -->
