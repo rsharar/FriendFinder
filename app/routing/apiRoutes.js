@@ -24,26 +24,35 @@ app.post("/api/friends", function (req, res) {
     newFriendScoreArr.push(newFriendTotalScore);
     console.log(newFriend.name + ": " + newFriendTotalScore);
 
-    // CALC SUM OF FRIENDS SCORES
+    // CALC DIFFERENCE BETWEEN SUM OF FRIENDS SCORES AND USER SCORES
     var diffArr = [];
     for (i in friends){
         // declare variable to store scores of friends currently in DB
         var dbFriendScores = friends[i].scores;
             var dbFriendTotalScore = 0;
+            // ITERATE THROUGH SCORES OF EACH FRIEND
             for (var k=0; k<dbFriendScores.length;k++){
                 dbFriendScores[k] = parseInt(dbFriendScores[k]);
                 dbFriendTotalScore = dbFriendTotalScore + dbFriendScores[k];
             }
-        diffArr.push(newFriendScoreArr - dbFriendTotalScore)
+        // STORE DIFFERENCE BETWEEN SCORES IN AN ARRAY
+        var diff = newFriendScoreArr - dbFriendTotalScore;
+        // IF DIFF IS NEGATIVE CONVERT TO POSITIVE VALUE
+        if (diff < 0){
+            diff = diff * -1
+            diffArr.push(diff)
+        }
+        else {
+            diffArr.push(diff)
+        }
     }
     console.log(diffArr)
 
-    // FIND SMALLEST DIFFERENCE IN TOTAL SCORES
-    var min = Math.min.apply(diffArr)
-    console.log(min)
+    // FIND INDEX OF SMALLEST DIFFERENCE IN TOTAL SCORES
+    var bestFriendIndex = diffArr.indexOf(Math.min(...diffArr));
 
-    // RETURN THE 'BEST MATCH' in modal
-    res.json(req.body);
+    // RETURN THE 'BEST FRIEND' in modal
+    res.json(friends[bestFriendIndex]);
 });
 
 }
