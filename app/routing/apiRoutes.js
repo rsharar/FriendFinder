@@ -11,25 +11,35 @@ app.post("/api/friends", function (req, res) {
     // store data from user survey in variable newFriend
     var newFriend = req.body;
     // push to friends array
-    friends.push(newFriend);
+    // friends.push(newFriend);
+
     // CALC SUM OF NEW FRIEND SCORES
     // convert survey responses to integers
     var newFriendTotalScore = 0;
-    for (var j=0; j<newFriend.scores; j++){
-        parseInt(newFriend.scores[j])
+    var newFriendScoreArr = [];
+    for (var j=0; j<newFriend.scores.length; j++){
+        newFriend.scores[j] = parseInt(newFriend.scores[j])
         newFriendTotalScore = newFriendTotalScore + newFriend.scores[j];
     }
+    newFriendScoreArr.push(newFriendTotalScore);
+    console.log(newFriend.name + ": " + newFriendTotalScore);
 
     // CALC SUM OF FRIENDS SCORES
-    for (i in friends.length){
+    for (i in friends){
         // declare variable to store scores of friends currently in DB
-        var dbFriend = friends[i].scores;
-        console.log(dbFriend);
-        
+        var dbFriendScores = friends[i].scores;
+            var dbFriendTotalScore = 0;
+            for (var k=0; k<dbFriendScores.length;k++){
+                dbFriendScores[k] = parseInt(dbFriendScores[k]);
+                dbFriendTotalScore = dbFriendTotalScore + dbFriendScores[k];
+            }
+        console.log(friends[i].name + ": "+ dbFriendTotalScore)
     }
-
     // FIND SMALLEST DIFFERENCE IN TOTAL SCORES
+
+
     // RETURN THE 'BEST MATCH' in modal
+    res.json(res.body);
 });
 
 }
